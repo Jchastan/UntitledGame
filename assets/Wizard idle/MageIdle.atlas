@@ -1,0 +1,34 @@
+
+MageIdle.png
+size: 1024,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+idle 1
+  rotate: false
+  xy: 2, 1204
+  size: 710, 599
+  orig: 710, 599
+  offset: 0, 0
+  index: -1
+idle 3
+  rotate: false
+  xy: 2, 1204
+  size: 710, 599
+  orig: 710, 599
+  offset: 0, 0
+  index: -1
+idle 2
+  rotate: false
+  xy: 2, 603
+  size: 710, 599
+  orig: 710, 599
+  offset: 0, 0
+  index: -1
+idle 4
+  rotate: false
+  xy: 2, 2
+  size: 710, 599
+  orig: 710, 599
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,93 @@
+
+player turn animation.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player turn Animation 1
+  rotate: false
+  xy: 2, 871
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1
+player turn Animation 2
+  rotate: false
+  xy: 2, 1
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1
+
+player turn animation2.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player turn Animation 3
+  rotate: false
+  xy: 2, 871
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1
+player turn Animation 4
+  rotate: false
+  xy: 2, 1
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1
+
+player turn animation3.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player turn Animation 5
+  rotate: false
+  xy: 2, 871
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1
+player turn Animation 6
+  rotate: false
+  xy: 2, 1
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1
+
+player turn animation4.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player turn Animation 7
+  rotate: false
+  xy: 2, 871
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1
+player turn Animation 8
+  rotate: false
+  xy: 2, 1
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1
+
+player turn animation5.png
+size: 2048,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player turn Animation 9
+  rotate: false
+  xy: 2, 1
+  size: 1590, 869
+  orig: 1590, 869
+  offset: 0, 0
+  index: -1

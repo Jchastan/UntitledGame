@@ -1,0 +1,47 @@
+
+EnemyBasic.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+idle 1
+  rotate: false
+  xy: 2, 1264
+  size: 1350, 629
+  orig: 1350, 629
+  offset: 0, 0
+  index: -1
+idle 2
+  rotate: false
+  xy: 2, 633
+  size: 1350, 629
+  orig: 1350, 629
+  offset: 0, 0
+  index: -1
+idle 3
+  rotate: false
+  xy: 2, 2
+  size: 1350, 629
+  orig: 1350, 629
+  offset: 0, 0
+  index: -1
+
+EnemyBasic2.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+idle 4
+  rotate: false
+  xy: 2, 633
+  size: 1350, 629
+  orig: 1350, 629
+  offset: 0, 0
+  index: -1
+idle 5
+  rotate: false
+  xy: 2, 2
+  size: 1350, 629
+  orig: 1350, 629
+  offset: 0, 0
+  index: -1
