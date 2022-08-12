@@ -186,7 +186,6 @@ public abstract class Enemy implements Targetable {
 	 * @param combat the combat which the enemy will be doing the action
 	 */
 	public void doAction(Combat combat) {
-		this.target = combat.getPlayerOne();
 		this.drawPile.get(0).playCard(combat, this.random);
 		this.discardPile.addCard(this.drawPile.get(0));
 		
@@ -259,10 +258,36 @@ public abstract class Enemy implements Targetable {
 	/**
 	 * sets the enemy's target to what it would be determined by their individual targeting system.
 	 */
-	public abstract void autoTarget();
+	public  void autoTarget()
+    {
+      if (UntitledGame.combat.getPlayerOne().getHealth() <= 0) {
+        
+        this.target = UntitledGame.combat.getPlayerTwo();
+        
 
-	@Override
-	public int getStrength()
+      }
+      else if(UntitledGame.combat.getPlayerTwo().getHealth() <= 0) {
+          
+          this.target = UntitledGame.combat.getPlayerOne();
+        }
+      
+      else
+      {
+        int targetChoice = random.nextInt(2);
+        
+        if(targetChoice == 0)
+        {
+          this.target = UntitledGame.combat.getPlayerOne();
+        }
+        else
+        {
+          this.target = UntitledGame.combat.getPlayerTwo();
+        }
+      }
+    }
+
+    @Override
+    public int getStrength()
 	{
 		return this.strength;
 	}

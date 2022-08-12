@@ -44,13 +44,13 @@ public class UntitledGame extends ApplicationAdapter {
     Pixmap pm;
     String myText;
     Music music;
-    Combat combat;
+    public static Combat combat;
     MainMenu mainMenu;
     TextureAtlas idle;
     Warrior bob;
     Mage jim;
     BitmapFont font;
-    Instance instance;
+    public static Instance instance;
     Random random;
     private OrthographicCamera camera;
     StretchViewport viewport;
@@ -85,7 +85,7 @@ public class UntitledGame extends ApplicationAdapter {
 	     bob = new Warrior(1, this.camera);
 	     jim = new Mage(2, this.camera);
 	     this.mainMenuInstance = new MenuInstance(this.batch, this.random, this.camera);
-	     this.instance = new SampleInstance(this.batch,this.random, this.camera);
+	     instance = new SampleInstance(this.batch,this.random, this.camera);
 	     
 	     font = new BitmapFont(Gdx.files.internal("texts\\healthtext.fnt"));
 	     font.getData().setScale(0.77f);

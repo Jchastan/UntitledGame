@@ -14,7 +14,7 @@ import cardThings.*;
 import gear.*;
 import com.mygdx.game.*;
 
-public class BasicEnemy extends Enemy {
+public class BasicEnemy extends Enemy  {
 
 	
 	/**
@@ -44,14 +44,16 @@ public class BasicEnemy extends Enemy {
 
 	@Override
 	public void autoTarget() {
-		if(this.random.nextInt(1) == 0)
-		{
-			
-		}
-		else
-		{
-			
-		}
+	  Card topCard = this.drawPile.get(0);
+			if(topCard instanceof BonkHeal  == true)
+			{
+			  this.target = this;
+			}
+	
+			else
+			{
+			  super.autoTarget();
+			}
 		
 	}
 	

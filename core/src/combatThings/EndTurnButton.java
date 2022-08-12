@@ -66,7 +66,7 @@ public class EndTurnButton {
 						  &&this.combat.getAllowCombatInputs())
 			 {
 				 //this.combat.getFont().draw(this.combat.getSpriteBatch(), "OKAY NOW THIS IS EPIC", 900, 700);
-			  this.combat.endPlayerTurn();
+                 combat.endPlayerTurn();
 			 }
 	      
 	}

@@ -27,6 +27,7 @@ import com.mygdx.game.*;/**
 		private HitBox hitbox;
 	   	
 		private OrthographicCamera camera;
+		protected boolean alive;
 		
 		// the character's current hand.
 		protected Hand hand;
@@ -77,7 +78,7 @@ import com.mygdx.game.*;/**
 	
 		public Character(int playernum, OrthographicCamera camera)
 		{
-			
+			alive = true;
 			this.position = new Vector3(0, 0, 0);
 			
 			this.camera = camera;
@@ -112,6 +113,11 @@ import com.mygdx.game.*;/**
 			  
 		  }
 		  
+		}
+		
+		public boolean isAlive()
+		{
+		  return this.alive;
 		}
 		
 		// The following methods are self explanatory getter methods.

@@ -26,6 +26,7 @@ public abstract class Instance {
 	protected Vector3[] healthBarWH;
 	protected Vector3[] healthTextPositions;
 	
+	
 	//Hash map containing all enemies.
 	protected HashMap<Integer, Enemy> enemies = new HashMap<Integer, Enemy>();
 	// the background texture.

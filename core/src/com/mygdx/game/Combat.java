@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
@@ -204,8 +206,13 @@ public class Combat implements InputProcessor {
 	}
 	
 	// updates game state based on player input. to be called within the render function of the main game.
-	public void update(float elapsedTime, BitmapFont font)
+	public boolean update(float elapsedTime, BitmapFont font)
 	{
+	    if(!playerOne.isAlive() && playerTwo.isAlive())
+	    {
+	      return false;
+	    }
+	      
 		this.instance.playMusic();
 		this.instance.drawbackground(this.batch);
 		this.instance.drawEnemies(this.batch, elapsedTime);
@@ -232,10 +239,32 @@ public class Combat implements InputProcessor {
 		this.font.draw(this.batch, "X: " + this.mouse_position.x + " Y: " + this.mouse_position.y,
 				       this.mouse_position.x + 30, this.mouse_position.y);	
 	    this.probep1Deckinput();
+	    
 	    this.drag();
+	    
+	   
 	    this.p1Energy.draw(this.batch);
 	    this.font.draw(this.batch, "" + this.playerOne.getEnergy() + " / " + this.playerOne.getEnergyPerTurn(), 150, 800);
-	}
+	    // if enemy turn, they attac
+	    if(!this.playerTurn)
+	    {
+	      Iterator<Integer> enemyIterator = this.instance.getEnemies().keySet().iterator();
+	        while(enemyIterator.hasNext()) 
+	        {
+	        
+	          Enemy currentEnemy = this.instance.getEnemies().get(enemyIterator.next());
+	          if(currentEnemy.isAlive())
+	          {
+	          currentEnemy.autoTarget();
+	          currentEnemy.doAction(this);
+	          }
+	        }
+	        this.startPlayerTurn();
+	      }
+	    
+	    return true;
+	    }
+	
 	
 	
 	/**
@@ -350,7 +379,10 @@ public class Combat implements InputProcessor {
 			//this.p1Hand.setSize(this.p1Hand.getSize() - 1);
 			//this.p1DiscardPile.addCard(this.p1Hand.get(highlightedCard));
 			//this.p1Hand.removeCard(highlightedCard);
+			if(this.p1Hand.getSize() >- 1)
+			{
 			this.p1Hand.get(highlightedCard).setDragging(false);
+			}
 		}
 
 	}
@@ -530,7 +562,6 @@ public class Combat implements InputProcessor {
 	/**
 	 *  ends the player's turn. 
 	 */
-	public  void endPlayerTurn()
 	{
 		this.playerTurn = false;
 		
@@ -556,6 +587,7 @@ public class Combat implements InputProcessor {
 	{
 		this.playerOne.setEnergyToEnergyPerTurn();
 		this.playerTwo.setEnergyToEnergyPerTurn();
+		this.playerTurn = true;
 	}
 	/**
 	 * draws player two's deck.
@@ -629,6 +661,11 @@ public class Combat implements InputProcessor {
 	public static Float getSpriteCenterY(Sprite s) {
 		Float centerY = s.getY()+s.getHeight()/2;
 		return centerY;
+	}
+	
+	public void endPlayerTurn()
+	{
+	  this.playerTurn = false;
 	}
 
 	@Override

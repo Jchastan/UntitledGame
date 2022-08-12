@@ -29,7 +29,7 @@ public class SampleInstance extends Instance {
 		healthTextPositions = new Vector3[1];
 
 		FileHandle[] musicSource = Gdx.files.internal("assets\\Music").list();
-		this.background = new Sprite (new TextureRegion(new Texture("assets\\Backgrounds/background 1.png"), 0, 0, 1600, 944));
+		this.background = new Sprite (new TextureRegion(new Texture("assets\\Backgrounds\\background 1.png"), 0, 0, 1600, 944));
 		this.music = Gdx.audio.newMusic(musicSource[random.nextInt(musicSource.length)]);
 		//this.music = Gdx.audio.newMusic(Gdx.files.internal("Music\\battle pokeman.mp3"));
 		this.enemies.put((Integer)0, new BasicEnemy(random, camera));
