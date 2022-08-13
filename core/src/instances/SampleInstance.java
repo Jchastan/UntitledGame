@@ -31,13 +31,13 @@ public class SampleInstance extends Instance {
 		FileHandle[] musicSource = Gdx.files.internal("assets\\Music").list();
 		this.background = new Sprite (new TextureRegion(new Texture("assets\\Backgrounds\\background 1.png"), 0, 0, 1600, 944));
 		this.music = Gdx.audio.newMusic(musicSource[random.nextInt(musicSource.length)]);
-		//this.music = Gdx.audio.newMusic(Gdx.files.internal("Music\\battle pokeman.mp3"));
-		this.enemies.put((Integer)0, new BasicEnemy(random, camera));
-		this.enemies.get((Integer)0).setPosition(400, 0);
+		this.enemies.put((Integer)0, new ShadowWench(random, camera));
+		this.enemies.get((Integer)0).setPosition(1075, 290);
 		
 		
 	    this.intentionPositions = new Vector3[this.enemies.size()];
-	    
+
+		//todo: have the enemy determine the intention position because only they know how tall they are lmao
 	   this.intentionPositions[0] = new Vector3(300, 130, 0);
 	  // this.camera.project(this.intentionPositions[0]);
 	   

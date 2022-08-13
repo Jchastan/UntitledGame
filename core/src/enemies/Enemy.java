@@ -28,7 +28,6 @@ import com.mygdx.game.*;
 public abstract class Enemy implements Targetable {
 	
 	
-	
 	// an enemy's animation
 	HashMap<String, Animation<TextureRegion>> animations = new HashMap<String, Animation<TextureRegion>>();
 	
@@ -55,8 +54,8 @@ public abstract class Enemy implements Targetable {
 	protected int block;
 	
 	// an Enemy Sprite
-	
 	protected Sprite sprite;
+
 	// Texture atlas that stores the idle position.
 	protected TextureAtlas idle;
 

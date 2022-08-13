@@ -234,7 +234,6 @@ public abstract class Card {
 			this.owner.getHand().removeCard(discard);
 		}
 		this.owner.getDiscardPile().addCard(this);
-		this.owner.getHand().setSize(this.owner.getHand().getSize() - 1);
 	}
 	
 	
