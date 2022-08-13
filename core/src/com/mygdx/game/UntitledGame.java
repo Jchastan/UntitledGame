@@ -33,7 +33,7 @@ import instances.SampleInstance;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 import combatThings.DeckViewer;
 public class UntitledGame extends ApplicationAdapter {
-	SpriteBatch batch;
+	public static SpriteBatch batch;
 	Texture img;
 	TextureAtlas textureAtlas;
     
@@ -47,11 +47,11 @@ public class UntitledGame extends ApplicationAdapter {
     public static Combat combat;
     MainMenu mainMenu;
     TextureAtlas idle;
-    Warrior bob;
-    Mage jim;
+    public static Warrior playerOne;
+    public static Mage playerTwo;
     BitmapFont font;
     public static Instance instance;
-    Random random;
+    public static Random random;
     private OrthographicCamera camera;
     StretchViewport viewport;
     Sprite rectangle;
@@ -82,20 +82,21 @@ public class UntitledGame extends ApplicationAdapter {
 
 	    // music.setLooping(true);
 	     //music.play();
-	     bob = new Warrior(1, this.camera);
-	     jim = new Mage(2, this.camera);
+	     playerOne = new Warrior(1, this.camera);
+	     playerTwo = new Mage(2, this.camera);
 	     this.mainMenuInstance = new MenuInstance(this.batch, this.random, this.camera);
-	     instance = new SampleInstance(this.batch,this.random, this.camera);
+	    instance = new SampleInstance(this.batch,this.random, this.camera);
 	     
 	     font = new BitmapFont(Gdx.files.internal("texts\\healthtext.fnt"));
 	     font.getData().setScale(0.77f);
 	     
 	    this.mainMenu = new MainMenu(this.mainMenuInstance, this.random, this.batch, this.camera, this.font);
-	 	this.combat = new Combat(bob, jim, this.instance, this.random, this.batch, this.camera, this.font);
+	 	combat = new Combat(playerOne, playerTwo, this.instance, this.random, this.batch, this.camera, this.font);
 	 
 		Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 10, 10));
 
 		pm.dispose();
+
 		
 	}
 
@@ -117,7 +118,7 @@ public class UntitledGame extends ApplicationAdapter {
 			this.mainMenu.update(this.font);
 		}
 		else {
-			this.combat.update(this.elapsedTime, this.font);
+			combat.update(this.elapsedTime, this.font);
 		}
 
 		batch.end();
@@ -131,9 +132,9 @@ public class UntitledGame extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		textureAtlas.dispose();
-		bob.getIdleAtlas().dispose();
+		playerOne.getIdleAtlas().dispose();
 		pm.dispose();
-		jim.getIdleAtlas().dispose();
+		PlayerTwo.getIdleAtlas().dispose();
 		this.font.dispose();
 	}
 	*/

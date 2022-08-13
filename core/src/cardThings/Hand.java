@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 
 public class Hand  {
 
+    protected characters.Character owner;
 	// makes so you can't really reshuffle your hand cause that would be dumb.
 
 	//protected HashMap<Integer, Card> cards = new HashMap<Integer, Card>();
@@ -19,6 +20,11 @@ public class Hand  {
 	final float CARD_XDISTANCE = 80;
 	final float CARD_YDISTANCE = 5;
 	final float ROTATION = 2;
+	
+	public Hand(characters.Character owner)
+	{
+	  this.owner = owner;
+	}
    
    /**
  * @return a specific card from your hand.
@@ -107,7 +113,13 @@ public class Hand  {
 	}
 
 	public void clear() {
-	   cards.clear();
+	  for(Card card: this.cards)
+	  {
+	      this.owner.getDiscardPile().addCard(card);
+	  }
+	  
+	  this.cards.clear();
+	  
 	}
 }
 

@@ -1,5 +1,6 @@
 package combatThings;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
@@ -19,7 +20,7 @@ import cardThings.Card;
 public class DeckViewer implements InputProcessor {
 	
 	// the character this deck belongs to.
-	protected HashMap<Integer, Card> cards;
+	protected ArrayList<Card> cards;
 	
 	// this stores the lowest possible y value you can scroll to.
 	protected float bottomY;
@@ -35,7 +36,7 @@ public class DeckViewer implements InputProcessor {
 	 * @param combat the current combat
 	 * @param character the character which the cards belong to.
 	 */
-	public DeckViewer(HashMap <Integer,Card> cards)
+	public DeckViewer(ArrayList<Card> cards)
 	{
 		
 		this.cards = cards;
@@ -79,7 +80,7 @@ public class DeckViewer implements InputProcessor {
 	 */
 	public void setCardPositions()
 	{
-		HashMap<Integer, Card> pile = this.cards;
+		ArrayList<Card> pile = this.cards;
 		
 	
 		for(int i = 0; i < pile.size(); i++)
@@ -128,7 +129,7 @@ public class DeckViewer implements InputProcessor {
 		this.initalized = false;
 	}
 	
-	public void update(HashMap<Integer, Card> cards)
+	public void update(ArrayList<Card> cards)
 	{
 		this.cards = cards;
 	}

@@ -41,6 +41,8 @@ import com.mygdx.game.*;/**
 		// represents how much armor you have. to be determined if implemented.
 		
 		// the character's current target.
+		
+		protected int cardsPerTurn;
 	
 		protected DrawPile drawPile;
 		
@@ -79,6 +81,7 @@ import com.mygdx.game.*;/**
 		public Character(int playernum, OrthographicCamera camera)
 		{
 			alive = true;
+			this.cardsPerTurn = 5;
 			this.position = new Vector3(0, 0, 0);
 			
 			this.camera = camera;
@@ -129,6 +132,10 @@ import com.mygdx.game.*;/**
 		public int getMaxHealth()
 		{
 			return this.maxHealth;
+		}
+		public int getCardsPerTurn()
+		{
+		  return this.cardsPerTurn;
 		}
 		
 		public Vector3 getPosition(Vector3 position)

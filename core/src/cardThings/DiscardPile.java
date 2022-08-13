@@ -1,12 +1,13 @@
 package cardThings;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class DiscardPile {
 
 	// Hashmap contaning the cards in the discard pile.
-	private HashMap<Integer, Card> cards = new HashMap<Integer, Card>();
+     ArrayList<Card> cards;
 	
 	
 	/**
@@ -14,20 +15,15 @@ public class DiscardPile {
 	 */
 	public DiscardPile()
 	{
-		
+		cards = new ArrayList<Card>();
 	}
 	
 	/**
 	 *  empty's all cards from this discard pile.
 	 */
-	public void reset()
+	public void clear()
 	{
-		Iterator starPlatinum = this.cards.entrySet().iterator();
-	    
-		while(starPlatinum.hasNext())
-		{
-			starPlatinum.remove();
-		}
+		this.cards.clear();
 	
 	}
 	
@@ -37,13 +33,13 @@ public class DiscardPile {
 	 */
 	public void addCard(Card card)
 	{
-		this.cards.put(this.cards.size(), card)	;
+		this.cards.add(card);
 	}
 	
 	/**
 	 * @return the HashMap of cards in the discardpile.
 	 */
-	public HashMap<Integer, Card> getCards()
+	public ArrayList<Card>getCards()
 	{
 		return this.cards;
 	}

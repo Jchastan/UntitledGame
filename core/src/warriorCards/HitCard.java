@@ -30,7 +30,7 @@ public class HitCard extends Card {
 	    // temporarily setting target.
 		
 		this.owner.setTarget(combat.getInstance().getEnemies().get(0));
-		this.owner.getTarget().doDamage(7);
+		this.owner.getTarget().doDamage(4);
 		this.owner.subtractEnergy(this.energyCost);
 		int[] discards = {combat.getHighlightedCard()};
 		this.discard(combat, discards);

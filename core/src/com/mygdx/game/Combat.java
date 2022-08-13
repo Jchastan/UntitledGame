@@ -118,7 +118,7 @@ public class Combat implements InputProcessor {
 	private Sprite exitSprite;
 
 	// How many cards to draw initially
-	private int p1HandSize = 9;
+	private int p1HandSize = UntitledGame.playerOne.getCardsPerTurn();
 
 	// How much time should have passed when the next card is drawn
 	private float cardDrawDeltaTime = 0.5f;
@@ -138,8 +138,8 @@ public class Combat implements InputProcessor {
 
 		// initialize hands draw piles and discard piles
 
-		this.p1Hand = new Hand();
-		this.p2Hand = new Hand();
+		this.p1Hand = new Hand(UntitledGame.playerOne);
+		this.p2Hand = new Hand(UntitledGame.playerTwo);
 
 		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
 		pixmap.setColor(Color.WHITE);
@@ -151,9 +151,15 @@ public class Combat implements InputProcessor {
 
 		this.playerOne.setHand(this.p1Hand);
 		this.playerTwo.setHand(this.p2Hand);
+		
+		// create a new discard pile for this combat
+        this.p1DiscardPile = new DiscardPile();
+        this.p2DiscardPile = new DiscardPile();
 
 		// makes a new draw pile for this combat instance for both characters
 		this.p1DrawPile = new DrawPile(this.playerOne, this.random);
+		this.p2DrawPile = new DrawPile(this.playerTwo, this.random);
+		this.playerOne.setDrawPile(p1DrawPile);
 		this.p2DrawPile = new DrawPile(this.playerTwo, this.random);
 
 		// give both characters a reference to this new DrawPile
@@ -537,7 +543,10 @@ public class Combat implements InputProcessor {
 	 */
 	public void startPlayerTurn() {
 		this.playerOne.setEnergyToEnergyPerTurn();
-		this.drawCard(0, 1);
+		for(int i = 0; i < UntitledGame.playerOne.getCardsPerTurn(); i++)
+		{
+		this.playerOne.getDrawPile().drawCard();
+		}
 		this.playerTwo.setEnergyToEnergyPerTurn();
 		this.playerTurn = true;
 	}

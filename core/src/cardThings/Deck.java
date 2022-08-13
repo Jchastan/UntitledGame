@@ -1,5 +1,7 @@
 package cardThings;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -32,11 +34,12 @@ public class Deck {
 	/**
 	 * all cards in the deck.
 	 */
-	protected HashMap<Integer, Card> deck = new HashMap<Integer, Card>();
+	ArrayList<Card> deck;
      
 	// constructs a new Deck object.
 	public Deck()
 	{
+	  this.deck = new ArrayList<Card>();
 		this.viewer = new DeckViewer(this.deck);
 	}
 	
@@ -55,10 +58,11 @@ public class Deck {
 		return this.deck.size();
 	}
 	
-	public  HashMap<Integer, Card> copy() {
-		HashMap<Integer, Card> buh = new HashMap<Integer, Card>();
-		buh.putAll(this.deck);
-		return buh;
+	@SuppressWarnings("unchecked")
+  public ArrayList<Card> copy() {
+		
+		
+		return (ArrayList<Card>) this.deck.clone();
 	}
 	
 	/**
@@ -66,7 +70,7 @@ public class Deck {
 	 */
 	public void addCard(Card card)
 	{
-		this.deck.put((Integer)this.deck.size(), card);
+		this.deck.add((card));
 	}
 	
 	
@@ -77,16 +81,8 @@ public class Deck {
 			 */
 			public void reshuffleDeck(Random random)
 			{
-				for(int i = 0; i < this.deck.size(); i++)
-				{
-					// random for remaining positions.
-					Integer r = i + random.nextInt(this.deck.size() - i);
-					
-					//swapping the elements.
-					Card temp = this.deck.get(r);
-					this.deck.put(r, this.deck.get(i));
-					this.deck.put(i, temp);
-				}
+				
+			  Collections.shuffle(this.deck, random);
 			
 			}
 			
@@ -95,21 +91,10 @@ public class Deck {
 			 * this removes a card of the given key to the deck.
 			 * pray that this doesn't cause a concurrent modification exception.
 			 */
-			public Card removeCard(Integer key)
+			public Card removeCard(int index)
 			{	
-				Card buh = this.deck.get(key);
-				for(int i = 0; i < this.deck.size(); i++)
-				{
-					Integer temp = i - 1;
-					if( i > key)
-					{
-						this.deck.replace(temp, this.deck.get((Integer)i));
-					}
-				}
-						
-				this.deck.remove(this.deck.size() - 1);
-				
-				return buh;
+			
+			  return this.deck.remove(index);
 			   
 			}
 			

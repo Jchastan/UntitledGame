@@ -232,8 +232,8 @@ public abstract class Card {
 	{
 		for (int discard : discards) {
 			this.owner.getHand().removeCard(discard);
+			this.owner.getDiscardPile().addCard(this);
 		}
-		this.owner.getDiscardPile().addCard(this);
 	}
 	
 	
