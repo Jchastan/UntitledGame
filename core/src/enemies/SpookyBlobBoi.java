@@ -21,14 +21,13 @@ import com.mygdx.game.*;
  * Author: John Chastanet
  * Note: png by Bunny
  */
-public class ShadowWench extends Enemy {
-
+public class SpookyBlobBoi extends Enemy {
     /**
      *  constructs a basic enemy with an idle animation, health, and x y coordinates. the key for the idle animation is "idle"
      */
-    public ShadowWench(Random random, OrthographicCamera camera) {
+    public SpookyBlobBoi(Random random, OrthographicCamera camera) {
         super(random, camera);
-        this.sprite = new Sprite(new Texture("Enemies\\spooky_wench.png"));
+        this.sprite = new Sprite(new Texture("Enemies\\spooky_blob_boi.png"));
 
         this.deck.addCard(new BonkCard(this));
         this.deck.addCard(new BonkCard(this));
@@ -42,7 +41,7 @@ public class ShadowWench extends Enemy {
         this.drawPile= new DrawPile(this, this.random);
         this.discardPile = new DiscardPile();
         this.strength = 1;
-        this.sprite.setSize(380,380);
+        this.sprite.setSize(420,420);
     }
     @Override
     public void drawIdle(SpriteBatch batch, float elapsedTime) {

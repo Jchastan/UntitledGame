@@ -211,7 +211,6 @@ public class Combat implements InputProcessor {
 		this.instance.drawEnemies(this.batch, elapsedTime);
 		this.playerOne.drawIdle(this.batch, elapsedTime);
 		this.playerTwo.drawIdle(this.batch, elapsedTime);
-		this.instance.showEnemyIntentions();
 		this.updateMouseCoordinates();
 		this.instance.updateEnemiesAlive();
 		this.endTurnButton.drawEndTurnButton();

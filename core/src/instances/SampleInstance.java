@@ -32,15 +32,17 @@ public class SampleInstance extends Instance {
 		this.background = new Sprite (new TextureRegion(new Texture("assets\\Backgrounds\\background 1.png"), 0, 0, 1600, 944));
 		this.music = Gdx.audio.newMusic(musicSource[random.nextInt(musicSource.length)]);
 		this.enemies.put((Integer)0, new ShadowWench(random, camera));
+		this.enemies.put((Integer)1, new SpookyBlobBoi(random, camera));
 		this.enemies.get((Integer)0).setPosition(1075, 290);
-		
-		
+		this.enemies.get((Integer)1).setPosition(1400, 290);
+
+
 	    this.intentionPositions = new Vector3[this.enemies.size()];
 
 		//todo: have the enemy determine the intention position because only they know how tall they are lmao
 	   this.intentionPositions[0] = new Vector3(300, 130, 0);
 	  // this.camera.project(this.intentionPositions[0]);
-	   
+
 	   this.healthBarPositions[0] = new Vector3(1000, 250, 0);
 		this.healthBarWH[0] = new Vector3(150f, 20, 0);
 		this.healthBarWH[1] = new Vector3(150f * this.enemies.get(0).getHealth() / this.enemies.get(0).getMaxHealth(), 20f, 0);

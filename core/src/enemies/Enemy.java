@@ -62,8 +62,6 @@ public abstract class Enemy implements Targetable {
 	// max health of enemy
 	protected int maxHealth;
 	
-	protected Vector3 position;
-	
 	protected OrthographicCamera camera;
 	
 	protected int strength;
@@ -78,8 +76,6 @@ public abstract class Enemy implements Targetable {
 	 */
 	public Enemy(Random random, OrthographicCamera camera)
 	{
-		
-		this.position = new Vector3(0, 0, 0);
 		
 		this.camera = camera;
 		isAlive = true;
@@ -98,15 +94,18 @@ public abstract class Enemy implements Targetable {
 	{
 		return this.sprite;	
 	}
-	
-	
-	
-	
-	
-	public void setPosition(float x, float y)
-	{
-		this.position.x = x;
-		this.position.y = y;
+
+
+	/**
+	 *
+	 * @param x sets the enemy sprite's x-axis center
+	 * @param y sets the bottom of the enemy's sprite
+	 * @Note: this decision is for the combat placement system to make more sense.
+	 * Think of it like the center of where the enemy is standing.
+	 */
+	public void setPosition(float x, float y) {
+		this.sprite.setCenter(x, y + this.sprite.getHeight()/2);
+		this.showIntention().setCenter(x, y + this.sprite.getHeight() + 20);
 	//	this.camera.project(this.position);
 	}
 	
@@ -206,10 +205,8 @@ public abstract class Enemy implements Targetable {
 	/**
 	 * draws the current enemy
 	 */
-	public  void drawIdle(SpriteBatch batch, float elapsedTime)
-	{
-		batch.draw(this.getAnimations().get("idle").getKeyFrame(elapsedTime, true), this.position.x, this.position.y);
-
+	public  void drawIdle(SpriteBatch batch, float elapsedTime) {
+		sprite.draw(batch);
 	}
 	
 	@Override

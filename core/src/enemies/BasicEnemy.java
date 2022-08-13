@@ -5,9 +5,11 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import characters.*;
 import characters.Character;
+import com.badlogic.gdx.math.Vector3;
 import enemyCards.BonkCard;
 import enemyCards.BonkHeal;
 import cardThings.*;
@@ -16,6 +18,7 @@ import com.mygdx.game.*;
 
 public class BasicEnemy extends Enemy  {
 
+	private Vector3 position;
 	
 	/**
 	 *  constructs a basic enemy with an idle animation, health, and x y coordinates. the key for the idle animation is "idle"
@@ -24,7 +27,9 @@ public class BasicEnemy extends Enemy  {
 	{
 		super(random, camera);
 		this.idle = new TextureAtlas(Gdx.files.internal("Basic Enemy demo\\EnemyBasic.atlas"));
-		
+
+		Vector3 position = new Vector3(0,0,0);
+
 		this.deck.addCard(new BonkCard(this));
 		this.deck.addCard(new BonkCard(this));
 		this.deck.addCard(new BonkCard(this));
@@ -40,6 +45,21 @@ public class BasicEnemy extends Enemy  {
 		this.drawPile= new DrawPile(this, this.random);	
 		this.discardPile = new DiscardPile();
 		this.strength = 1;
+	}
+
+	/**
+	 *
+	 * @param batch the spritebatch to draw the character to
+	 * @param elapsedTime time elapsed since the last draw call
+	 */
+	@Override
+	public void drawIdle(SpriteBatch batch, float elapsedTime) {
+		batch.draw(this.getAnimations().get("idle").getKeyFrame(elapsedTime, true), this.position.x, this.position.y);
+	}
+	@Override
+	public void setPosition(float x, float y) {
+		this.position.x = x;
+		this.position.y = y;
 	}
 
 	@Override
