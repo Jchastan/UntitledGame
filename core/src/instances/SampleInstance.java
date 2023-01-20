@@ -40,8 +40,6 @@ public class SampleInstance extends Instance {
 	    this.intentionPositions = new Vector3[this.enemies.size()];
 
 		//todo: have the enemy determine the intention position because only they know how tall they are lmao
-	   this.intentionPositions[0] = new Vector3(300, 130, 0);
-	  // this.camera.project(this.intentionPositions[0]);
 
 	   this.healthBarPositions[0] = new Vector3(1000, 250, 0);
 		this.healthBarWH[0] = new Vector3(150f, 20, 0);

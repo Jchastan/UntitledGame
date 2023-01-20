@@ -108,15 +108,13 @@ public abstract class Instance {
 	 */
 	public void drawEnemies(SpriteBatch batch, float elapsedTime)
 	{
-		//todo: draw intents
 		for(int i = 0; i < this.enemies.size(); i++)
 		{
-			if(this.enemies.get(i).getHealth() > 0)
-			{
-			this.enemies.get(i).drawIdle(batch, elapsedTime);
-			this.enemies.get(i).showIntention().draw(this.batch);
+			Enemy tmp = this.enemies.get(i);
+			if(tmp.getHealth() > 0) {
+				tmp.drawIdle(batch, elapsedTime);
+				tmp.drawIntent(batch);
 			}
-				
 		}
 	}
 	

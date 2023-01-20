@@ -105,7 +105,6 @@ public abstract class Enemy implements Targetable {
 	 */
 	public void setPosition(float x, float y) {
 		this.sprite.setCenter(x, y + this.sprite.getHeight()/2);
-		this.showIntention().setCenter(x, y + this.sprite.getHeight() + 20);
 	//	this.camera.project(this.position);
 	}
 	
@@ -208,7 +207,17 @@ public abstract class Enemy implements Targetable {
 	public  void drawIdle(SpriteBatch batch, float elapsedTime) {
 		sprite.draw(batch);
 	}
-	
+
+	/**
+	 * This draws the intents for the enemies, it's meant to be used when enemies are drawn or intents change.
+	 * @param batch this is the batch that the intent will be drawn on.
+	 */
+	public void drawIntent(SpriteBatch batch) {
+		this.showIntention().setCenter(this.getSprite().getX() + this.getSprite().getWidth()/2,
+				this.getSprite().getY() + this.getSprite().getHeight() + 20);
+		this.showIntention().draw(batch);
+	}
+
 	@Override
 	public void setTarget(Targetable target)
 	{
