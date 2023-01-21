@@ -29,7 +29,7 @@ public class DeckViewer implements InputProcessor {
 	
 
 	
-	// if the the card's positions have been initialized.
+	// if the card's positions have been initialized.
 	private boolean initalized;
 	
 	/**
@@ -40,7 +40,6 @@ public class DeckViewer implements InputProcessor {
 	{
 		
 		this.cards = cards;
-
 		//this.setCardPositions();
 		this.topY = 646;
 		this.bottomY = 446;
@@ -53,7 +52,6 @@ public class DeckViewer implements InputProcessor {
 	public void showCards(SpriteBatch batch)
 	{	
 		Gdx.input.setInputProcessor(this);
-		
 		if(this.initalized)	{
 
 			for(int i = 0; i < this.cards.size(); i++) {
@@ -62,17 +60,9 @@ public class DeckViewer implements InputProcessor {
 			}
 		}
 		
-		else
-		{
+		else {
 			this.setCardPositions();
 		}
-		
-		
-		
-		
-
-		
-		
 	}
 	
 	/**
@@ -178,32 +168,27 @@ public class DeckViewer implements InputProcessor {
 
 	@Override
 	public boolean scrolled(float xAmount, float yAmount) {
+
+		if (cards.size() == 0) return false;
 		
-		
-		if (xAmount > 0) {
-			for(int i = 0; i < this.cards.size(); i++)
-			{
+		if (yAmount > 0) {
+			for(int i = 0; i < this.cards.size(); i++) {
 				this.cards.get(i).getDisplay().translateY(10);
 			}
+			if (this.cards.get(this.cards.size() - 1).getDestination().y <= this.bottomY) {
+				for(int i = 0; i < this.cards.size(); i++) {
+					this.cards.get(i).setDestination(new Vector3(this.cards.get(i).getDestination().x, this.cards.get(i).getDestination().y + Gdx.graphics.getDeltaTime()*10000, 0));
+				}
+			}
 		}
-		if (xAmount < 0) {
-			for(int i = 0; i < this.cards.size(); i++)
-			{
+		if (yAmount < 0) {
+			for(int i = 0; i < this.cards.size(); i++) {
 				this.cards.get(i).getDisplay().translateY(-10);
 			}
-		}
-		if(xAmount > 0 && this.cards.get(this.cards.size() - 1).getDestination().y <= this.bottomY)
-		{
-			for(int i = 0; i < this.cards.size(); i++)
-			{
-				this.cards.get(i).setDestination(new Vector3(this.cards.get(i).getDestination().x, this.cards.get(i).getDestination().y + Gdx.graphics.getDeltaTime()*10000, 0));
-			}
-		}
-		else if(xAmount < 0 && this.cards.get(0).getDestination().y > this.topY )
-		{
-			for(int i = 0; i < this.cards.size(); i++)
-			{
-				this.cards.get(i).setDestination(new Vector3(this.cards.get(i).getDestination().x, this.cards.get(i).getDestination().y - Gdx.graphics.getDeltaTime()*10000, 0));
+			if (this.cards.get(0).getDestination().y > this.topY) {
+				for(int i = 0; i < this.cards.size(); i++) {
+					this.cards.get(i).setDestination(new Vector3(this.cards.get(i).getDestination().x, this.cards.get(i).getDestination().y - Gdx.graphics.getDeltaTime()*10000, 0));
+				}
 			}
 		}
 		return true;

@@ -669,6 +669,7 @@ public class Combat implements InputProcessor {
 
 	@Override
 	public boolean scrolled(float xAmount, float yAmount) {
+		//if (!this.allowCombatInputs)
 		// TODO Auto-generated method stub
 		return false;
 	}

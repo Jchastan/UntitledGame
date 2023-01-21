@@ -87,7 +87,7 @@ public class Deck {
 			}
 			
 			/**
-			 * @param key the key of the card you want to remove.
+			 * @param index the index of the card you want to remove.
 			 * this removes a card of the given key to the deck.
 			 * pray that this doesn't cause a concurrent modification exception.
 			 */
