@@ -36,12 +36,7 @@ public class SampleInstance extends Instance {
 		this.enemies.get((Integer)0).setPosition(1075, 290);
 		this.enemies.get((Integer)1).setPosition(1400, 290);
 
-
-	    this.intentionPositions = new Vector3[this.enemies.size()];
-
-		//todo: have the enemy determine the intention position because only they know how tall they are lmao
-
-	   this.healthBarPositions[0] = new Vector3(1000, 250, 0);
+	   	this.healthBarPositions[0] = new Vector3(1000, 250, 0);
 		this.healthBarWH[0] = new Vector3(150f, 20, 0);
 		this.healthBarWH[1] = new Vector3(150f * this.enemies.get(0).getHealth() / this.enemies.get(0).getMaxHealth(), 20f, 0);
 		

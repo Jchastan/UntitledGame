@@ -105,7 +105,6 @@ public abstract class Enemy implements Targetable {
 	 */
 	public void setPosition(float x, float y) {
 		this.sprite.setCenter(x, y + this.sprite.getHeight()/2);
-	//	this.camera.project(this.position);
 	}
 	
 	public int getHealth()
@@ -138,15 +137,10 @@ public abstract class Enemy implements Targetable {
 		this.block = block;
 	}
 	
-	
-	
-	
 	public void setAlive(boolean b)
 	{
 		this.isAlive = b;
 	}
-	
-	
 	
 	public void setMaxHealth(int maxHealth)
 	{
@@ -176,7 +170,6 @@ public abstract class Enemy implements Targetable {
 		this.health = health;
 	}
 
-	
 	/**
 	 * makes the enemy play the top card on their draw pile and then discard it to their discard pile.
 	 * this also automatically reshuffles the draw and discard pile when the draw pile is empty.
@@ -351,7 +344,12 @@ public abstract class Enemy implements Targetable {
 		
 	}
 	
-	
+
+	@Override
+	public void drawHealth(SpriteBatch batch) {
+
+		//TODO: implement healthbars for enemies here the same way that intentions are drawn.
+	}
 	
 
 }

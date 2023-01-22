@@ -4,6 +4,7 @@ import cardThings.Deck;
 import cardThings.DiscardPile;
 import cardThings.DrawPile;
 import cardThings.Hand;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * @author John Chastanet and Seth Roper
@@ -62,8 +63,7 @@ public interface Targetable {
 	 * and i really need a fucking hair cut. If you're a recruiter and are seeing this comment from github or some shit, uhhh, ignore it.
 	 */
 	public Hand getHand();
-	
-	
 
 
+    void drawHealth(SpriteBatch batch);
 }

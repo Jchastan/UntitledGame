@@ -33,8 +33,7 @@ public class DeckViewer implements InputProcessor {
 	private boolean initalized;
 	
 	/**
-	 * @param combat the current combat
-	 * @param character the character which the cards belong to.
+	 * @param cards the cards in the deck that is being viewed.
 	 */
 	public DeckViewer(ArrayList<Card> cards)
 	{
