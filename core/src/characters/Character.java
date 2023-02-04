@@ -371,8 +371,13 @@ import com.mygdx.game.*;/**
 		{
 			return this.hand;
 		}
-		
-		public void setHand(Hand hand)
+
+	@Override
+	public void drawHealth(SpriteBatch batch) {
+
+	}
+
+	public void setHand(Hand hand)
 		{
 			this.hand = hand;
 		}

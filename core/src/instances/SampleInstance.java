@@ -45,36 +45,5 @@ public class SampleInstance extends Instance {
 			//this.camera.project(this.healthBarWH[i]);
 		}
 	//	this.camera.project(this.healthBarPositions[0]);
-	    
-	   
 	}
-
-	@Override
-	public void drawEnemyHealth(ShapeDrawer drawer, SpriteBatch batch, BitmapFont font ) {
-		
-		Vector3 blah = this.healthBarPositions[0];
-		
-		Vector3 bleh = this.healthBarWH[0];
-		Vector3 bleeh = this.healthBarWH[1];
-		
-		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
-		pixmap.setColor(Color.WHITE);
-		pixmap.drawPixel(0, 0);
-		Texture texture = new Texture(pixmap); //remember to dispose of later
-		pixmap.dispose();
-		TextureRegion region = new TextureRegion(texture, 0, 0, 1, 1);
-		drawer = new ShapeDrawer(batch, region);
-		// p1 health container
-		if(this.enemies.get(0).isAlive())
-		{
-		drawer.filledRectangle(blah.x, blah.y, bleh.x , bleh.y, new Color(Color.BLACK));
-		// p1 health as a ratio of current health to max health
-		drawer.filledRectangle(blah.x, blah.y,  bleh.x * this.enemies.get(0).getHealth() / this.enemies.get(0).getMaxHealth(), bleeh.y, new Color(Color.RED));
-		
-		font.draw(batch,this.enemies.get(0).getHealthVisual(), 1035, 272);	
-		}
-	}
-		
-	
-	
 }

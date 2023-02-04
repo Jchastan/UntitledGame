@@ -6,8 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,6 +16,7 @@ import com.mygdx.game.Combat;
 
 import enemies.*;
 import space.earlygrey.shapedrawer.ShapeDrawer;
+
 
 // represents a specifc "Instance" of a combat, meaning what enemies music background etc will be set up.
 public abstract class Instance {
@@ -114,6 +114,7 @@ public abstract class Instance {
 			if(tmp.getHealth() > 0) {
 				tmp.drawIdle(batch, elapsedTime);
 				tmp.drawIntent(batch);
+				//TODO: draw enemy healthbar whenever I get around to moving the method and logic.
 			}
 		}
 	}
@@ -130,11 +131,46 @@ public abstract class Instance {
 	 * draws all enemy health bars in the instance.
 	 */
 	public void drawEnemyHealth(ShapeDrawer drawer, SpriteBatch batch, BitmapFont font) {
+
+		for (int i = 0; i < this.enemies.size(); i++) {
+
+
+			Enemy current = this.enemies.get(i);
+			//System.out.println(current.getX());
+
+			Vector3 blah = new Vector3(current.getX() - 75,
+									   current.getY() - 40, 0);
+
+			Vector3 bleh = new Vector3(150f, 20, 0);
+			Vector3 bleeh = new Vector3(150f * current.getHealth() / current.getMaxHealth(), 20f, 0);
+
+			Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+			pixmap.setColor(Color.WHITE);
+			pixmap.drawPixel(0, 0);
+			Texture texture = new Texture(pixmap); //remember to dispose of later
+			pixmap.dispose();
+			TextureRegion region = new TextureRegion(texture, 0, 0, 1, 1);
+			drawer = new ShapeDrawer(batch, region);
+			//drawer.filledRectangle((float)i * 1000f, 0.0f, 600.0f,600.0f);
+			// p1 health container
+			if(current.isAlive()) {
+				drawer.filledRectangle(blah.x, blah.y, bleh.x , bleh.y, new Color(Color.BLACK));
+				System.out.println("for enemy: " + i);
+				System.out.println(blah);
+				System.out.println(bleh);
+				System.out.println(bleeh);
+				// p1 health as a ratio of current health to max health
+				drawer.filledRectangle(blah.x, blah.y,  bleh.x * current.getHealth() / current.getMaxHealth(), bleeh.y, new Color(Color.RED));
+
+				font.draw(batch,current.getHealthVisual(), current.getX() - 40, current.getY() - 18);
+			}
+		}
 	}
 	
 	/**
 	 * plays the top card of every enemy within an instance.
 	 */
+	@SuppressWarnings("SuspiciousIndentation")
 	public void attack(Combat combat)
 	{
 		for(int i = 0; i < this.enemies.size(); i++)

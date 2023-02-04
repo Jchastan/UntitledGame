@@ -56,6 +56,12 @@ public abstract class Enemy implements Targetable {
 	// an Enemy Sprite
 	protected Sprite sprite;
 
+	// the x-axis center of the sprite
+	protected float posX;
+
+	// the y-axis bottom of the sprite
+	protected float posY;
+
 	// Texture atlas that stores the idle position.
 	protected TextureAtlas idle;
 
@@ -105,6 +111,8 @@ public abstract class Enemy implements Targetable {
 	 */
 	public void setPosition(float x, float y) {
 		this.sprite.setCenter(x, y + this.sprite.getHeight()/2);
+		this.posX = x;
+		this.posY = y;
 	}
 	
 	public int getHealth()
@@ -350,6 +358,9 @@ public abstract class Enemy implements Targetable {
 
 		//TODO: implement healthbars for enemies here the same way that intentions are drawn.
 	}
-	
+	public float getX() {return posX;}
+	public float getY() {return posY;}
+
+
 
 }
