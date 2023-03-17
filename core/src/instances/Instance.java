@@ -155,10 +155,6 @@ public abstract class Instance {
 			// p1 health container
 			if(current.isAlive()) {
 				drawer.filledRectangle(blah.x, blah.y, bleh.x , bleh.y, new Color(Color.BLACK));
-				System.out.println("for enemy: " + i);
-				System.out.println(blah);
-				System.out.println(bleh);
-				System.out.println(bleeh);
 				// p1 health as a ratio of current health to max health
 				drawer.filledRectangle(blah.x, blah.y,  bleh.x * current.getHealth() / current.getMaxHealth(), bleeh.y, new Color(Color.RED));
 

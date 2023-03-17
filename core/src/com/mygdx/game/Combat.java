@@ -356,6 +356,7 @@ public class Combat implements InputProcessor {
 			this.p1Hand.get(highlightedCard).setDragging(true);
 		} else if (highlightedCard < this.p1Hand.getSize() && this.p1Hand.get(highlightedCard).isDragging() &&
 				this.p1Hand.get(highlightedCard).getSprite().getY() > 250 &&
+				//TODO: make this set targets based on proximity to enemy sprites.
 				this.playerOne.getEnergy() >= this.p1Hand.get(highlightedCard).getEnergyCost()) {
 			//this plays the card. currently, the target of player one is null so it throws a null pointer exception. 
 			//TODO: make card discard itself.
