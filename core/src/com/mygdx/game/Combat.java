@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -27,9 +28,12 @@ import cardThings.DrawPile;
 import cardThings.Hand;
 import characters.Character;
 import combatThings.EndTurnButton;
+import combatThings.Targetable;
 import enemies.Enemy;
 import instances.Instance;
 import space.earlygrey.shapedrawer.ShapeDrawer;
+
+import static java.lang.Math.abs;
 
 public class Combat implements InputProcessor {
 
@@ -358,9 +362,19 @@ public class Combat implements InputProcessor {
 				this.p1Hand.get(highlightedCard).getSprite().getY() > 250 &&
 				//TODO: make this set targets based on proximity to enemy sprites.
 				this.playerOne.getEnergy() >= this.p1Hand.get(highlightedCard).getEnergyCost()) {
-			//this plays the card. currently, the target of player one is null so it throws a null pointer exception. 
-			//TODO: make card discard itself.
+			ArrayList<Enemy> enemies = new ArrayList<Enemy>(this.instance.getEnemies().values());
+			float dist = Float.MAX_VALUE;
+			Enemy newTarget = enemies.get(1);
+			for (int i = 0; i < enemies.size(); i++) {
+				float newDist = Math.abs(enemies.get(i).getX() - this.p1Hand.get(highlightedCard).getSprite().getX());
+				if (newDist < dist) {
+					dist = newDist;
+					newTarget = enemies.get(i);
+				}
+			}
+
 			this.p1Hand.get(highlightedCard).playCard(this, this.random);
+			//TODO: make card discard itself.
 		}
 
 	}
