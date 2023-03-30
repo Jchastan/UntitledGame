@@ -364,15 +364,16 @@ public class Combat implements InputProcessor {
 				this.playerOne.getEnergy() >= this.p1Hand.get(highlightedCard).getEnergyCost()) {
 			ArrayList<Enemy> enemies = new ArrayList<Enemy>(this.instance.getEnemies().values());
 			float dist = Float.MAX_VALUE;
-			Enemy newTarget = enemies.get(1);
+			Enemy newTarget = enemies.get(0);
 			for (int i = 0; i < enemies.size(); i++) {
+				if (!enemies.get(i).isAlive()) { continue;}
 				float newDist = Math.abs(enemies.get(i).getX() - this.p1Hand.get(highlightedCard).getSprite().getX());
 				if (newDist < dist) {
 					dist = newDist;
 					newTarget = enemies.get(i);
 				}
 			}
-
+			this.playerOne.setTarget(newTarget);
 			this.p1Hand.get(highlightedCard).playCard(this, this.random);
 			//TODO: make card discard itself.
 		}

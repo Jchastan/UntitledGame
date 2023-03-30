@@ -235,8 +235,9 @@ public abstract class Card {
 			this.owner.getDiscardPile().addCard(this);
 		}
 	}
-	
-	
 
+	public Targetable getOwner() {
+		return owner;
+	}
 }
 
