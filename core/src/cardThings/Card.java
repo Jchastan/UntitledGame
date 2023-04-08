@@ -1,5 +1,6 @@
 package cardThings;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -233,6 +234,12 @@ public abstract class Card {
 		for (int discard : discards) {
 			this.owner.getHand().removeCard(discard);
 			this.owner.getDiscardPile().addCard(this);
+			if (this.owner.getDeck().size() <= 0) {
+				for (int i = 0; i < this.owner.getDiscardPile().getCards().size(); i++ ) {
+					this.owner.getDeck().addCard(this.owner.getDiscardPile().getCards().get(i));
+				}
+				this.owner.getDiscardPile().clear();
+			}
 		}
 	}
 

@@ -359,8 +359,8 @@ public class Combat implements InputProcessor {
 			this.p1Hand.get(highlightedCard).setDestination(new Vector3(this.mouse_position.x, this.mouse_position.y, 0));
 			this.p1Hand.get(highlightedCard).setDragging(true);
 		} else if (highlightedCard < this.p1Hand.getSize() && this.p1Hand.get(highlightedCard).isDragging() &&
+				//TODO: implement bezier and/or bspline curve.
 				this.p1Hand.get(highlightedCard).getSprite().getY() > 250 &&
-				//TODO: make this set targets based on proximity to enemy sprites.
 				this.playerOne.getEnergy() >= this.p1Hand.get(highlightedCard).getEnergyCost()) {
 			ArrayList<Enemy> enemies = new ArrayList<Enemy>(this.instance.getEnemies().values());
 			float dist = Float.MAX_VALUE;
