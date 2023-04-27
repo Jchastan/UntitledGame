@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 import cardThings.Card;
@@ -129,6 +130,8 @@ public class Combat implements InputProcessor {
 
 	// Determines if the deck should be updating position
 	private boolean pauseHand = false;
+	private float initialCardX;
+	private float initialCardY;
 
 
 	// constructs a new combat object.
@@ -302,7 +305,7 @@ public class Combat implements InputProcessor {
 	}
 
 	/**
-	 *
+	 * Method handles the dragging of cards, probably a little too much but oh well
 	 */
 	public void drag() {
 		for (int i = p1Hand.getSize() - 1; i >= 0; i--) {
@@ -355,11 +358,15 @@ public class Combat implements InputProcessor {
 		}
 
 		if (this.pauseHand && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			if(!this.p1Hand.get(highlightedCard).isDragging()) {
+				initialCardX = this.p1Hand.get(highlightedCard).getSprite().getX();
+				initialCardY = this.p1Hand.get(highlightedCard).getSprite().getY();
+			}
 			this.p1Hand.get(highlightedCard).getSprite().setCenter(this.mouse_position.x, this.mouse_position.y);
 			this.p1Hand.get(highlightedCard).setDestination(new Vector3(this.mouse_position.x, this.mouse_position.y, 0));
 			this.p1Hand.get(highlightedCard).setDragging(true);
+			bezier(initialCardX, initialCardY, mouse_position.x, mouse_position.y);
 		} else if (highlightedCard < this.p1Hand.getSize() && this.p1Hand.get(highlightedCard).isDragging() &&
-				//TODO: implement bezier and/or bspline curve.
 				this.p1Hand.get(highlightedCard).getSprite().getY() > 250 &&
 				this.playerOne.getEnergy() >= this.p1Hand.get(highlightedCard).getEnergyCost()) {
 			ArrayList<Enemy> enemies = new ArrayList<Enemy>(this.instance.getEnemies().values());
@@ -378,6 +385,38 @@ public class Combat implements InputProcessor {
 			//TODO: make card discard itself.
 		}
 
+	}
+
+	/**
+	 *
+	 * @param startX - starting x of the curve
+	 * @param startY - starting y of the curve
+	 * @param endX - ending x of the curve
+	 * @param endY - ending y of the curve
+	 * This is a helper method that takes start and end coordinates and calculates a 100 step bezier curve
+	 * with a middle point of starting x and ending y.
+	 */
+	private void bezier(float startX, float startY, float endX, float endY) {
+		//TODO: currently crashes the game and doesn't draw anything, fix one of these at at time.
+		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
+		pixmap.setColor(Color.WHITE);
+		pixmap.drawPixel(0, 0);
+		Texture texture = new Texture(pixmap); //remember to dispose of later
+		pixmap.dispose();
+		TextureRegion region = new TextureRegion(texture, 0, 0, 1, 1);
+		ShapeDrawer bezier = new ShapeDrawer(this.batch, region);
+		float curX = startX;
+		float curY = startY;
+		float nextX = 0;
+		float nextY = 0;
+		for (float t=0; t < 1; t += 0.05) {
+			nextX = (float)(Math.pow(1-t,2)*curX + 2*(1-t)*t*startX + Math.pow(t,2)*endX);
+			nextY = (float)(Math.pow(1-t,2)*curY + 2*(1-t)*t*endY + Math.pow(t,2)*endY);
+			bezier.line(curX, curY, nextX, nextY, Color.BLUE, 6.9f);
+			curX = nextX;
+			curY = nextY;
+		}
+		bezier.line(curX, curY, endX, endY, Color.BLUE, 6.9f);
 	}
 
 	/**
