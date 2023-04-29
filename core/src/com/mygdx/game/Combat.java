@@ -359,12 +359,16 @@ public class Combat implements InputProcessor {
 
 		if (this.pauseHand && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			if(!this.p1Hand.get(highlightedCard).isDragging()) {
-				initialCardX = this.p1Hand.get(highlightedCard).getSprite().getX();
+				initialCardX = this.p1Hand.get(highlightedCard).getSprite().getX() +
+								this.p1Hand.get(highlightedCard).getSprite().getWidth()/2;
 				initialCardY = this.p1Hand.get(highlightedCard).getSprite().getY();
 			}
 			this.p1Hand.get(highlightedCard).getSprite().setCenter(this.mouse_position.x, this.mouse_position.y);
 			this.p1Hand.get(highlightedCard).setDestination(new Vector3(this.mouse_position.x, this.mouse_position.y, 0));
 			this.p1Hand.get(highlightedCard).setDragging(true);
+			//TODO: theres a bug with the initial card x, no idea what's wrong but sometimes the startpoint of the curve
+			// is incorrect. it should be the middle of the card since it's the bottom left plus half the width.
+			// check what number you get from asking for the sprite's x coordinate.
 			bezier(initialCardX, initialCardY, mouse_position.x, mouse_position.y);
 		} else if (highlightedCard < this.p1Hand.getSize() && this.p1Hand.get(highlightedCard).isDragging() &&
 				this.p1Hand.get(highlightedCard).getSprite().getY() > 250 &&
@@ -397,7 +401,6 @@ public class Combat implements InputProcessor {
 	 * with a middle point of starting x and ending y.
 	 */
 	private void bezier(float startX, float startY, float endX, float endY) {
-		//TODO: currently crashes the game and doesn't draw anything, fix one of these at at time.
 		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
 		pixmap.setColor(Color.WHITE);
 		pixmap.drawPixel(0, 0);
@@ -405,18 +408,20 @@ public class Combat implements InputProcessor {
 		pixmap.dispose();
 		TextureRegion region = new TextureRegion(texture, 0, 0, 1, 1);
 		ShapeDrawer bezier = new ShapeDrawer(this.batch, region);
-		float curX = startX;
+		/*float curX = startX;
 		float curY = startY;
 		float nextX = 0;
 		float nextY = 0;
+		*/
+		Vector2 curP = new Vector2(startX, startY);
+		Vector2 nextP = new Vector2(0,0);
+		Vector2 midP1 = new Vector2(startX, endY/2);
+		Vector2 midP2 = new Vector2(startX + (endX-startX)/2, endY);
 		for (float t=0; t < 1; t += 0.05) {
-			nextX = (float)(Math.pow(1-t,2)*curX + 2*(1-t)*t*startX + Math.pow(t,2)*endX);
-			nextY = (float)(Math.pow(1-t,2)*curY + 2*(1-t)*t*endY + Math.pow(t,2)*endY);
-			bezier.line(curX, curY, nextX, nextY, Color.BLUE, 6.9f);
-			curX = nextX;
-			curY = nextY;
+			curP.x = (float)(Math.pow(1-t,3)*startX + 3*Math.pow(1-t,2)*t*midP1.x + 3*Math.pow(t,2)*(1-t)*midP2.x + Math.pow(t,3)*endX);
+			curP.y = (float)(Math.pow(1-t,3)*startY + 3*Math.pow(1-t,2)*t*midP1.y + 3*Math.pow(t,2)*(1-t)*midP2.y + Math.pow(t,3)*endY);
+			bezier.filledCircle(curP, 6.9f, Color.BLUE);
 		}
-		bezier.line(curX, curY, endX, endY, Color.BLUE, 6.9f);
 	}
 
 	/**
